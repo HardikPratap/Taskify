@@ -1,0 +1,10 @@
+.task_col_heading{
+    display: flex;
+    justify-content: center;
+}
+
+.task_col_icon{
+    width: 30px;
+    margin-right: 5px;
+
+}
