@@ -1,5 +1,6 @@
 import React from 'react'
 import "./TaskCol.css"
+import Taskcard from './Taskcard'
 
 const TaskCol = ({taskColName,image}) => {
   return (
@@ -9,6 +10,8 @@ const TaskCol = ({taskColName,image}) => {
             <img className='task_col_icon' src={image} alt="img" /> 
             { taskColName}
         </h2>
+
+        <Taskcard />
       </section>
     
   )
