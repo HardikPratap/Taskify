@@ -9,14 +9,22 @@ import doneIcon from'../assets/check-mark-button.png'
 
 function App() {
 
+  const [tasks, setTasks]= useState([]);
+  console.log("tasks",tasks)
   return (
 
       <div className='app'>
-        <TaskForm />
+        <TaskForm setTasks={setTasks}/>
         <main className='app_main'> 
-          <TaskCol taskColName="To do" image={todoIcon}/>
-          <TaskCol taskColName="Doing" image={doingIcon}/>
-          <TaskCol taskColName="Done" image={doneIcon}/>
+          <TaskCol 
+            title="To do" 
+            image={todoIcon} 
+            tasks={tasks} 
+            status="todo"
+          />
+
+          <TaskCol title="Doing" image={doingIcon} tasks={tasks} status="doing"/>
+          <TaskCol title="Done" image={doneIcon} tasks={tasks} status="done"/>
         
 
         </main>
