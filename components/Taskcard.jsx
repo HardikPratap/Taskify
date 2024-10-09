@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tag from './Tag'
 import Delete from "../assets/delete.png"
 import "./TaskCard.css"
 
 const Taskcard = () => {
+
   return (
     <article className='task_card'>
         <p className='task_text'>
