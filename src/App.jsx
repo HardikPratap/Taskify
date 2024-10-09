@@ -6,16 +6,16 @@ import todoIcon from '../assets/direct-hit.png'
 import doingIcon from'../assets/glowing-star.png'
 import doneIcon from'../assets/check-mark-button.png'
 
-const oldTasks=localStorage.getItem("tasks");
-console.log(oldTasks);
+// const oldTasks=localStorage.getItem("tasks");  
+// console.log(oldTasks);
 
 
 function App() {
 
-  const [tasks, setTasks]= useState(JSON.parse(oldTasks));
+  const [tasks, setTasks]= useState([]); // JSON.parse(oldTasks) in useState to use LocalStorage
 
-  useEffect(() => {localStorage.setItem("tasks", JSON.stringify(tasks))
-  },[tasks]);
+  // useEffect(() => {localStorage.setItem("tasks", JSON.stringify(tasks))
+  // },[tasks]);
 
 
   function handleDelete(taskIndex){
