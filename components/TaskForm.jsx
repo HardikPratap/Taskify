@@ -6,6 +6,7 @@ const TaskForm = () => {
     const [taskData,setTaskData]=useState({
         task:"",
         status:"Todo",
+        tags:[]
     });
 
     function handleChange(e){
@@ -20,6 +21,27 @@ const TaskForm = () => {
         e.preventDefault();
         console.log(taskData)
     }
+
+    const checkTag=(tag)=>{
+        return taskData.tags.some(item => item === tag);
+    }
+
+    function selectTag(tag){
+        if(taskData.tags.some(item=> item === tag)){
+            const filterTag=taskData.tags.filter(item=> item !==tag);
+            setTaskData(prev => {
+                return  {...prev, tags: filterTag}
+            })
+        }
+        else {
+            setTaskData(prev => {
+                return  {...prev, tags: [tag]}
+            })
+        }
+
+    };
+
+    console.log(taskData.tags)
 
 
     // const [task,setTask] = useState("");
@@ -38,12 +60,11 @@ const TaskForm = () => {
             <input type="text" className='task_input' placeholder='Enter Task' onChange={handleChange} name='task'/>
             <div className='task_form_bottom_line'>
                 <div>
-                    <Tag tagName='HTML' />
-                    <Tag tagName="CSS" />
-                    <Tag tagName="JS" />
-                    <Tag tagName="REACT" />
-                    
-                </div>
+                    <Tag tagName='HTML'selectTag={selectTag} selected={checkTag("HTML")}/>
+                    <Tag tagName="CSS" selectTag={selectTag} selected={checkTag("CSS")}/>
+                    <Tag tagName="JS" selectTag={selectTag} selected={checkTag("JS")}/>
+                    <Tag tagName="REACT" selectTag={selectTag} selected={checkTag("REACT")}/>
+                     </div>
                 
                 <div>
                     <select className="task_status" onChange={handleChange} name='status'>
