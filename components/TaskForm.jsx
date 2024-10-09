@@ -5,7 +5,7 @@ import Tag from "./Tag";
 const TaskForm = ({setTasks}) => {
     const [taskData,setTaskData]=useState({
         task:"",
-        status:"Todo",
+        status:"todo",
         tags:[]
     });
 
@@ -22,7 +22,12 @@ const TaskForm = ({setTasks}) => {
         // console.log(taskData)
         setTasks(prev =>{
             return [...prev , taskData]
-        })
+        });
+        setTaskData({
+            task:"",
+            status:"todo",
+            tags:[]
+        });
     }
 
     const checkTag=(tag)=>{
@@ -60,7 +65,14 @@ const TaskForm = ({setTasks}) => {
     <div>
       <header className='app_header'>
         <form onSubmit={handleSubmit}>
-            <input type="text" className='task_input' placeholder='Enter Task' onChange={handleChange} name='task'/>
+            <input 
+                type="text" 
+                className='task_input' 
+                placeholder='Enter Task' 
+                onChange={handleChange} 
+                name='task'
+                value={taskData.task}
+                />
             <div className='task_form_bottom_line'>
                 <div>
                     <Tag tagName='HTML'selectTag={selectTag} selected={checkTag("HTML")}/>
@@ -70,7 +82,13 @@ const TaskForm = ({setTasks}) => {
                      </div>
                 
                 <div>
-                    <select className="task_status" onChange={handleChange} name='status'>
+                    <select 
+                        className="task_status" 
+                        onChange={handleChange} 
+                        name='status'
+                        value={taskData.status}
+                        >
+
                         <option value="todo">Todo</option>
                         <option value="doing">Doing</option>
                         <option value="done">Done</option>
