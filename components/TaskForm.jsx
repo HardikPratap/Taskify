@@ -20,6 +20,10 @@ const TaskForm = ({setTasks}) => {
     function handleSubmit(e){
         e.preventDefault();
         // console.log(taskData)
+        if (!taskData.task.trim()) {
+            alert("Task title cannot be empty!");
+            return; // Prevent submission if the task is empty
+        }
         setTasks(prev =>{
             return [...prev , taskData]
         });
