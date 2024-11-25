@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h1>Taskify</h1>
+        <h1 style={{textAlign:"center" , fontSize: "60px", marginTop:"10px"}}>Taskify</h1>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} /> {/* Redirect default route */}
           <Route path="/login" element={<Login />} />
