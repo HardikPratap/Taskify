@@ -24,9 +24,10 @@ const TaskForm = ({setTasks}) => {
             alert("Task title cannot be empty!");
             return; // Prevent submission if the task is empty
         }
-        setTasks(prev =>{
-            return [...prev , taskData]
-        });
+        axios.post('http://localhost:5001/api/tasks', taskData)
+        .then((res) => setTasks((prev) => [...prev, res.data]))
+        .catch((err) => console.error(err));
+  
         setTaskData({
             task:"",
             status:"todo",

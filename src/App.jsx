@@ -1,47 +1,25 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import TaskForm from '../components/TaskForm'
-import TaskCol from '../components/TaskCol'
-import todoIcon from '../assets/direct-hit.png'
-import doingIcon from'../assets/glowing-star.png'
-import doneIcon from'../assets/check-mark-button.png'
+// src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Login from "../pages/LoginPage";
+import Signup from "../pages/Signup";
+import Tasks from "../pages/Tasks";
 
-// const oldTasks=localStorage.getItem("tasks");  
-// console.log(oldTasks);
-
-
-function App() {
-
-  const [tasks, setTasks]= useState([]); // JSON.parse(oldTasks) in useState to use LocalStorage
-
-  // useEffect(() => {localStorage.setItem("tasks", JSON.stringify(tasks))
-  // },[tasks]);
-
-
-  function handleDelete(taskIndex){
-    const newTasks= tasks.filter((task,index )=>index !==taskIndex);
-    setTasks(newTasks);
-  }
+const App = () => {
   return (
-
-      <div className='app'>
-        <TaskForm setTasks={setTasks}/>
-        <main className='app_main'> 
-          <TaskCol 
-            title="To Do" 
-            image={todoIcon} 
-            tasks={tasks} 
-            status="todo"
-             handleDelete={handleDelete}
-          />
-
-          <TaskCol title="Doing" image={doingIcon} tasks={tasks} status="doing" handleDelete={handleDelete} />
-          <TaskCol title="Done" image={doneIcon} tasks={tasks} status="done" handleDelete={handleDelete} />
-        
-
-        </main>
+    <Router>
+      <div>
+        <h1>Taskify</h1>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} /> {/* Redirect default route */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="*" element={<h2>404 Page Not Found</h2>} />
+        </Routes>
       </div>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
