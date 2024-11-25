@@ -18,22 +18,36 @@ const TaskForm = ({setTasks}) => {
         })
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        // console.log(taskData)
+    
         if (!taskData.task.trim()) {
             alert("Task title cannot be empty!");
             return; // Prevent submission if the task is empty
         }
-        axios.post('http://localhost:5001/api/tasks', taskData)
-        .then((res) => setTasks((prev) => [...prev, res.data]))
-        .catch((err) => console.error(err));
-  
-        setTaskData({
-            task:"",
-            status:"todo",
-            tags:[]
-        });
+    
+        const token = localStorage.getItem("token"); // Retrieve token from localStorage
+        if (!token) {
+            alert("You are not authorized. Please log in.");
+            return; // Prevent submission if no token exists
+        }
+    
+        axios
+            .post('http://localhost:5001/api/tasks/', taskData, {
+                headers: { authorization: token }, // Include token in headers
+            })
+            .then((res) => {
+                setTasks((prev) => [...prev, res.data]);
+                setTaskData({
+                    task: "",
+                    status: "todo",
+                    tags: [],
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Failed to add task. Please check your authorization.");
+            });
     }
 
     const checkTag=(tag)=>{

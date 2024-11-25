@@ -16,11 +16,11 @@ const TaskCol = ({title,image , tasks , status , handleDelete}) => {
                 (task ,index) => 
                     task.status === status && (
                     <Taskcard 
-                        key={index}     
+                        key={task._id}     
                         title={task.task}
                         tags={task.tags}
-                        handleDelete={handleDelete}
-                        index={index}
+                        handleDelete={()=> handleDelete(task._id)}
+                        index={task._id}
                     />)
        )}
       </section>
